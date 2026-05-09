@@ -1,0 +1,20 @@
+# Quantum-Safe Email Encryption Platform - Python dependencies
+#
+# Stdlib modules used (no install required):
+#   smtplib, imaplib, email, sqlite3, argparse, json, os, base64, hashlib
+
+# --- Classical cryptography & symmetric primitives ---
+cryptography>=42.0,<49
+
+# --- Post-quantum primitives (NIST FIPS 203 / FIPS 204) ---
+# We try the official Open Quantum Safe binding first; if it cannot load
+# liboqs (the C library is not always available, e.g. on Windows without
+# Visual Studio Build Tools) we fall back to the pure-Python reference
+# implementations of the same standardized algorithms.
+liboqs-python>=0.10 ; platform_system != "Windows"
+kyber-py>=1.2          # ML-KEM-768  (FIPS 203)
+dilithium-py>=1.4      # ML-DSA-65   (FIPS 204)
+
+# --- CLI / configuration / output ---
+colorama>=0.4
+python-dotenv>=1.0
